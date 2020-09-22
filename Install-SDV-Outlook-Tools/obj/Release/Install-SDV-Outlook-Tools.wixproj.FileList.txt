@@ -1,0 +1,6 @@
+C:\GitHub\SDV-Outlook-Tools\Install-SDV-Outlook-Tools\bin\Release\Install_SDV_Outlook_Tools.msi
+C:\GitHub\SDV-Outlook-Tools\Install-SDV-Outlook-Tools\bin\Release\Install_SDV_Outlook_Tools.wixpdb
+obj\Release\Product.wixobj
+obj\Release\Install-SDV-Outlook-Tools.wixproj.BindContentsFileListnull.txt
+obj\Release\Install-SDV-Outlook-Tools.wixproj.BindOutputsFileListnull.txt
+obj\Release\Install-SDV-Outlook-Tools.wixproj.BindBuiltOutputsFileListnull.txt
