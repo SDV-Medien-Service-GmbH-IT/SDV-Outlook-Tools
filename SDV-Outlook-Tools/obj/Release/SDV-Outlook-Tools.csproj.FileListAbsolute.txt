@@ -1,3 +1,7 @@
+C:\GitHub\SDV-Outlook-Tools\SDV-Outlook-Tools\bin\Release\Files\Banner.bmp
+C:\GitHub\SDV-Outlook-Tools\SDV-Outlook-Tools\bin\Release\Files\Dialog.bmp
+C:\GitHub\SDV-Outlook-Tools\SDV-Outlook-Tools\bin\Release\Files\SDV.ico
+C:\GitHub\SDV-Outlook-Tools\SDV-Outlook-Tools\bin\Release\Files\Eula.rtf
 C:\GitHub\SDV-Outlook-Tools\SDV-Outlook-Tools\bin\Release\SDV-Outlook-Tools.dll
 C:\GitHub\SDV-Outlook-Tools\SDV-Outlook-Tools\bin\Release\SDV-Outlook-Tools.pdb
 C:\GitHub\SDV-Outlook-Tools\SDV-Outlook-Tools\bin\Release\SDV-Outlook-Tools.dll.manifest

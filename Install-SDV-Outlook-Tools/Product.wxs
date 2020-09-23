@@ -1,34 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-	<Product Id="*" 
-			 Name="Install_SDV_Outlook_Tools" 
+	<Product Id="522998A5-B43D-4F55-9C69-42C680309775" 
+			 Name="SDV_Outlook_Tools" 
 			 Language="1033" 
 			 Version="1.0.0.0" 
 			 Manufacturer="SDV Medien + Service GmbH" 
-			 UpgradeCode="3369debf-33ad-44dd-ad76-123b9febafd1">
+			 UpgradeCode="5c1de105-4f37-43d0-abb8-823ba34b7604">
 		<Package InstallerVersion="200" 
 				 Compressed="yes" 
 				 InstallScope="perMachine" />
-		<!--
-		<Media Id="1"
-			   Cabinet="Install_SDV_Outlook_Tools.cab"
-			   EmbedCab="yes" />
-		-->
+		<Property Id="ApplicationFolderName" Value="SDV-Outlook-Tools" />
+		<Property Id="WixAppFolder" Value="WixPerMachineFolder" />
+		<WixVariable Id="WixUISupportPerUser" Value="0" />
 		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
-	
+		<MediaTemplate />
+
+		<Feature Id="ProductFeature" Title="Install_SDV_Outlook_Tools" Level="1">
+			<ComponentGroupRef Id="ProductComponents" />
+			<ComponentRef Id="Registry_FriendlyName" />
+			<ComponentRef Id="Registry_Description" />
+			<ComponentRef Id="Registry_Manifest" />
+			<ComponentRef Id="Registry_LoadBehavior" />
+		</Feature>
+<!--
+		<Media Id="1" Cabinet="SDV-Outlook-Tools.cab" EmbedCab="yes"/>
+-->
+		<UIRef Id="WixUI_Advanced" />
+		<WixVariable Id="WixUILicenseRtf" Value="$(var.AddinFiles)\Files\EULA.rtf" />
+		<WixVariable Id="WixUIBannerBmp" Value="$(var.AddinFiles)\Files\Banner.bmp" />
+		<WixVariable Id="WixUIDialogBmp" Value="$(var.AddinFiles)\Files\Dialog.bmp" />
+		<!--
 		<PropertyRef Id="WIX_IS_NETFRAMEWORK_462_OR_LATER_INSTALLED"/>
 		<Condition Message="SDV-Outlook-Tools requires .NET Framework 4.6.1 or higher.">
 			<![CDATA[Installed OR WIX_IS_NETFRAMEWORK_462_OR_LATER_INSTALLED]]>
 		</Condition>
-<!--
-
-		<Property Id="OFFICEPATH">
-			<RegistrySearch Id="OfficeReg" Root="HKLM" Key="SOFTWARE\WOW6432Node\Microsoft\Office\16.0\Common\InstallRoot" Name="Path" Type="raw" />
-		</Property>
-		<Condition Message="This application requires Microsoft Office. Please install Office then run this installer again.">
-			<![CDATA[Installed OR (OFFICEPATH)]]>
-		</Condition>
 -->
+
+		<PropertyRef Id='WIXNETFX4RELEASEINSTALLED'/>
+		<Condition Message='This setup requires the .NET Framework 4.7.2 (or greater) to be installed.'>
+			<![CDATA[Installed OR (WIXNETFX4RELEASEINSTALLED >= "#461808")]]>
+		</Condition>		
+		
 		<Property Id='QUERY_OUTLOOK_2016_REG'>
 			<RegistrySearch Id='QueryOutlook2016Reg'
 			Root='HKLM'
@@ -39,92 +51,87 @@
 		<Condition Message="This application requires Microsoft Outlook. Please install Office then run this installer again.">
 			<![CDATA[Installed OR (QUERY_OUTLOOK_2016_REG)]]>
 		</Condition>
-		
 
-		<!--
-		<WixVariable Id="WixUILicenseRtf" Value="EULA.rtf" />
-		-->
-		<UIRef Id="WixUI_Minimal" />	
-		<!--
-		<Feature Id="ProductFeature" Title="SDV_Outlook_Tools" Level="1">
-			<ComponentGroupRef Id="ProductComponents" />
-			<ComponentRef Id="Registry_FriendlyName" />
-			<ComponentRef Id="Registry_Description" />
-			<ComponentRef Id="Registry_Manifest" />
-			<ComponentRef Id="Registry_LoadBehavior" />
-		</Feature>
-	-->
+		<Property Id="VSTORUNTIMEREDIST">
+			<RegistrySearch
+			  Id="VSTORuntimeRedist"
+			  Root="HKLM"
+			  Key="SOFTWARE\Microsoft\VSTO Runtime Setup\v4R"
+			  Name="Version"
+			  Type="raw" />
+		</Property>
+		<Condition
+		  Message="The Visual Studio 2010 Tools for Office Runtime is not installed. 
+				  Please download and install from 
+				  http://www.microsoft.com/en-us/download/details.aspx?id=20479.">
+			<![CDATA[Installed OR VSTORUNTIMEREDIST>="10.0.30319"]]>
+		</Condition>
+
+		<Icon Id="SDV.ico" SourceFile="$(var.AddinFiles)Files\SDV.ico"/>
+		<Property Id="ARPPRODUCTICON" Value="SDV.ico" />
+		
 	</Product>
 
-
-	
 	<Fragment>
 		<Directory Id="TARGETDIR" Name="SourceDir">
 			<Directory Id="ProgramFilesFolder">
-				<Directory Id="INSTALLFOLDER" Name="SDV_Outlook_Tools" />
+				<Directory Id="INSTALLFOLDER" Name="Install_SDV_Outlook_Tools" />
 				<Component Id="Registry_FriendlyName">
-					<RegistryValue Id="RegKey_FriendlyName" 
-								   Root="HKLM"
-								   Key="Software\WOW6432Node\Microsoft\Office\Excel\AddIns\SDV_Outlook_Tools"
-								   Name="SDV-Outlook-Tools"
+					<RegistryValue Id="RegKey_FriendlyName" Root="HKLM"
+								   Key="SOFTWARE\WOW6432Node\Microsoft\Office\Outlook\Addins\SDV-Outlook-Tools"
+								   Name="FriendlyName"
 								   Value="SDV-Outlook-Tools"
-								   Type="string" 
-								   KeyPath="yes" />
+								   Type="string" KeyPath="yes" />
 				</Component>
 				<Component Id="Registry_Description">
-					<RegistryValue Id="RegKey_Description" 
-								   Root="HKLM"
-								   Key="Software\WOW6432Node\Microsoft\Office\Excel\AddIns\SDV_Outlook_Tools"
-								   Name="SDV-Outlook-Tools"
-								   Value="SDV-Outlook-Tools"
-								   Type="string" 
-								   KeyPath="yes" />
+					<RegistryValue Id="RegKey_Description" Root="HKLM"
+								   Key="SOFTWARE\WOW6432Node\Microsoft\Office\Outlook\Addins\SDV-Outlook-Tools"
+								   Name="Description"
+								   Value="SDV Outlook Addin Sammlung"
+								   Type="string" KeyPath="yes" />
 				</Component>
 				<Component Id="Registry_Manifest">
-					<RegistryValue Id="RegKey_Manifest" 
-								   Root="HKLM"
-								   Key="Software\WOW6432Node\Microsoft\Office\Excel\AddIns\SDV_Outlook_Tools"
-								   Name="Manifest" 
-								   Value="[INSTALLFOLDER]SDV-Outlook-Tools.vsto|vstolocal"
-								   Type="string" 
-								   KeyPath="yes" />
+					<RegistryValue Id="RegKey_Manifest" Root="HKLM"
+								   Key="SOFTWARE\WOW6432Node\Microsoft\Office\Outlook\Addins\SDV-Outlook-Tools"
+								   Name="Manifest" Value="[INSTALLFOLDER]SDV-Outlook-Tools.vsto|vstolocal"
+								   Type="string" KeyPath="yes" />
 				</Component>
 				<Component Id="Registry_LoadBehavior">
-					<RegistryValue Id="RegKey_LoadBehavior" 
-								   Root="HKLM"
-								   Key="Software\WOW6432Node\Microsoft\Office\Excel\AddIns\SDV_Outlook_Tools"
-								   Name="LoadBehavior"
-								   Value="3"
-								   Type="integer" 
-								   KeyPath="yes" />
-				</Component>				
+					<RegistryValue Id="RegKey_LoadBehavior" Root="HKLM"
+								   Key="SOFTWARE\WOW6432Node\Microsoft\Office\Outlook\Addins\SDV-Outlook-Tools"
+								   Name="LoadBehavior" Value="3"
+								   Type="integer" KeyPath="yes" />
+				</Component>	
 			</Directory>
 		</Directory>
 	</Fragment>
-
 	<Fragment>
 		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
-			<Component Id="SDVOutlookToolsAddin1_vsto_Component">
-				<File Id="SDVOutlookToolsAddin1_vsto" KeyPath="yes"
-					  Name="SDV-Outlook-Tools.vsto" Source="$(var.AddinFiles)"></File>
-			</Component>
-			<Component Id="SDVOutlookToolsAddIn1_dll_manifest_Component">
-				<File Id="SDVOutlookToolsAddIn1_dll_manifest" KeyPath="yes"
-					  Name="SDV-Outlook-Tools.dll.manifest" Source="$(var.AddinFiles)"></File>
-			</Component>
-			<Component Id="MSOfficeToolsCommon_dll_Component">
-				<File Id="MSOfficeToolsCommon_dll" KeyPath="yes"
-					  Name="Microsoft.Office.Tools.Common.v4.0.Utilities.dll"
-					  Source="$(var.AddinFiles)"></File>
-			</Component>
-			<Component Id="MSOfficeToolsUtilities_dll_Component">
-				<File Id="MSOfficeToolsUtilities_dll" KeyPath="yes"
-					  Name="Microsoft.Office.Tools.Outlook.v4.0.Utilities.dll"
-					  Source="$(var.AddinFiles)"></File>
-			</Component>
-			<Component Id="SDVOutlookToolsAddIn1_dll_Component" >
-				<File Id="SDVOutlookToolsAddIn1_dll" KeyPath="yes"
-					  Name="SDV-Outlook-Tools.dll" Source="$(var.AddinFiles)" />
+				<Component Id="SDVOutlookTools_vsto_Component">
+					<File Id="SDVOutlookTools_vsto" KeyPath="yes"
+						  Name="SDV-Outlook-Tools.vsto" Source="$(var.AddinFiles)"></File>
+				</Component>
+				<Component Id="SDVOutlookTools_dll_manifest_Component">
+					<File Id="SDVOutlookTools_dll_manifest" KeyPath="yes"
+						  Name="SDV-Outlook-Tools.dll.manifest" Source="$(var.AddinFiles)"></File>
+				</Component>
+				<Component Id="MSOfficeToolsCommon_dll_Component">
+					<File Id="MSOfficeToolsCommon_dll" KeyPath="yes"
+						  Name="Microsoft.Office.Tools.Common.v4.0.Utilities.dll"
+						  Source="$(var.AddinFiles)"></File>
+				</Component>
+				<Component Id="MSOfficeToolsExcel_dll_Component">
+					<File Id="MSOfficeToolsExcel_dll" KeyPath="yes"
+						  Name="Microsoft.Office.Tools.Outlook.v4.0.Utilities.dll"
+						  Source="$(var.AddinFiles)"></File>
+				</Component>
+				<Component Id="SDVOutlookTools_dll_Component" >
+					<File Id="SDVOutlookTools_dll" KeyPath="yes"
+						  Name="SDV-Outlook-Tools.dll" Source="$(var.AddinFiles)" />
+				</Component>
+			<Component Id="SDVOutlookTools_Eula">
+				<File Id="SDVOutlookTools_Eula" KeyPath="yes"
+					  Name="Eula.rtf" Source="$(var.AddinFiles)Files\"></File>
 			</Component>			
 		</ComponentGroup>
 	</Fragment>

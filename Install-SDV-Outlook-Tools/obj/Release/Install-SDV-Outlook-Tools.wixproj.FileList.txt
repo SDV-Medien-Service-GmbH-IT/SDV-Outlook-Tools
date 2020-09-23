@@ -1,3 +1,4 @@
+C:\GitHub\SDV-Outlook-Tools\Install-SDV-Outlook-Tools\bin\Release\cab1.cab
 C:\GitHub\SDV-Outlook-Tools\Install-SDV-Outlook-Tools\bin\Release\Install_SDV_Outlook_Tools.msi
 C:\GitHub\SDV-Outlook-Tools\Install-SDV-Outlook-Tools\bin\Release\Install_SDV_Outlook_Tools.wixpdb
 obj\Release\Product.wixobj

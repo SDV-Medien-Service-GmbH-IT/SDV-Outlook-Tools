@@ -34,17 +34,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Ribbon1));
             Microsoft.Office.Tools.Ribbon.RibbonDropDownItem ribbonDropDownItemImpl1 = this.Factory.CreateRibbonDropDownItem();
             Microsoft.Office.Tools.Ribbon.RibbonDropDownItem ribbonDropDownItemImpl2 = this.Factory.CreateRibbonDropDownItem();
             Microsoft.Office.Tools.Ribbon.RibbonDropDownItem ribbonDropDownItemImpl3 = this.Factory.CreateRibbonDropDownItem();
             Microsoft.Office.Tools.Ribbon.RibbonDropDownItem ribbonDropDownItemImpl4 = this.Factory.CreateRibbonDropDownItem();
             Microsoft.Office.Tools.Ribbon.RibbonDropDownItem ribbonDropDownItemImpl5 = this.Factory.CreateRibbonDropDownItem();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Ribbon1));
             this.rb_SDVOutlookTools = this.Factory.CreateRibbonTab();
             this.group1 = this.Factory.CreateRibbonGroup();
-            this.btn_RemoveAttachments = this.Factory.CreateRibbonButton();
             this.dp_Mailstatus = this.Factory.CreateRibbonDropDown();
             this.dp_Mailalter = this.Factory.CreateRibbonDropDown();
+            this.btn_RemoveAttachments = this.Factory.CreateRibbonButton();
             this.rb_SDVOutlookTools.SuspendLayout();
             this.group1.SuspendLayout();
             this.SuspendLayout();
@@ -63,16 +63,6 @@
             this.group1.Items.Add(this.btn_RemoveAttachments);
             this.group1.Label = "Attachments";
             this.group1.Name = "group1";
-            // 
-            // btn_RemoveAttachments
-            // 
-            this.btn_RemoveAttachments.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
-            this.btn_RemoveAttachments.Image = ((System.Drawing.Image)(resources.GetObject("btn_RemoveAttachments.Image")));
-            this.btn_RemoveAttachments.Label = "Remove Attachments";
-            this.btn_RemoveAttachments.Name = "btn_RemoveAttachments";
-            this.btn_RemoveAttachments.ScreenTip = "Remove Attachments from Mails.";
-            this.btn_RemoveAttachments.ShowImage = true;
-            this.btn_RemoveAttachments.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_RemoveAttachments_Click);
             // 
             // dp_Mailstatus
             // 
@@ -93,6 +83,16 @@
             this.dp_Mailalter.Items.Add(ribbonDropDownItemImpl5);
             this.dp_Mailalter.Label = "Zeitraum";
             this.dp_Mailalter.Name = "dp_Mailalter";
+            // 
+            // btn_RemoveAttachments
+            // 
+            this.btn_RemoveAttachments.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+            this.btn_RemoveAttachments.Image = ((System.Drawing.Image)(resources.GetObject("btn_RemoveAttachments.Image")));
+            this.btn_RemoveAttachments.Label = "Remove Attachments";
+            this.btn_RemoveAttachments.Name = "btn_RemoveAttachments";
+            this.btn_RemoveAttachments.ScreenTip = "Remove Attachments from Mails.";
+            this.btn_RemoveAttachments.ShowImage = true;
+            this.btn_RemoveAttachments.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_RemoveAttachments_Click);
             // 
             // Ribbon1
             // 
