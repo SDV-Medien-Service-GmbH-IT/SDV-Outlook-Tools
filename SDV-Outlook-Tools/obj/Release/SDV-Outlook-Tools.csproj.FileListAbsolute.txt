@@ -15,3 +15,4 @@ C:\GitHub\SDV-Outlook-Tools\SDV-Outlook-Tools\obj\Release\SDV-Outlook-Tools.cspr
 C:\GitHub\SDV-Outlook-Tools\SDV-Outlook-Tools\obj\Release\SDV-Outlook-Tools.csproj.CopyComplete
 C:\GitHub\SDV-Outlook-Tools\SDV-Outlook-Tools\obj\Release\SDV-Outlook-Tools.dll
 C:\GitHub\SDV-Outlook-Tools\SDV-Outlook-Tools\obj\Release\SDV-Outlook-Tools.pdb
+C:\GitHub\SDV-Outlook-Tools\SDV-Outlook-Tools\obj\Release\SDV-Outlook-Tools.csprojAssemblyReference.cache

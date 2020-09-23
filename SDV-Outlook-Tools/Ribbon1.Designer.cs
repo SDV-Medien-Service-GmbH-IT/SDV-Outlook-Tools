@@ -78,6 +78,7 @@
             this.dp_Mailstatus.Items.Add(ribbonDropDownItemImpl2);
             this.dp_Mailstatus.Label = "Mailstatus";
             this.dp_Mailstatus.Name = "dp_Mailstatus";
+            this.dp_Mailstatus.ScreenTip = "Select read or unread Mails";
             // 
             // dp_Mailalter
             // 
@@ -87,8 +88,9 @@
             this.dp_Mailalter.Items.Add(ribbonDropDownItemImpl3);
             this.dp_Mailalter.Items.Add(ribbonDropDownItemImpl4);
             this.dp_Mailalter.Items.Add(ribbonDropDownItemImpl5);
-            this.dp_Mailalter.Label = "Zeitraum";
+            this.dp_Mailalter.Label = "Mailalter";
             this.dp_Mailalter.Name = "dp_Mailalter";
+            this.dp_Mailalter.ScreenTip = "(in Days)";
             // 
             // separator1
             // 
@@ -100,7 +102,7 @@
             this.btn_MoveAttachments.Image = ((System.Drawing.Image)(resources.GetObject("btn_MoveAttachments.Image")));
             this.btn_MoveAttachments.Label = "Move";
             this.btn_MoveAttachments.Name = "btn_MoveAttachments";
-            this.btn_MoveAttachments.ScreenTip = "Attachments from Mails.";
+            this.btn_MoveAttachments.ScreenTip = "MOVE Attachments from Mails.";
             this.btn_MoveAttachments.ShowImage = true;
             this.btn_MoveAttachments.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_MoveAttachments_Click);
             // 
@@ -114,6 +116,7 @@
             this.btn_ReMoveAttachments.Image = ((System.Drawing.Image)(resources.GetObject("btn_ReMoveAttachments.Image")));
             this.btn_ReMoveAttachments.Label = "Remove";
             this.btn_ReMoveAttachments.Name = "btn_ReMoveAttachments";
+            this.btn_ReMoveAttachments.ScreenTip = "REMOVE Attachments from Mails.";
             this.btn_ReMoveAttachments.ShowImage = true;
             this.btn_ReMoveAttachments.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_RemoveAttachments_Click);
             // 
