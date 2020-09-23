@@ -44,10 +44,10 @@
             this.group1 = this.Factory.CreateRibbonGroup();
             this.dp_Mailstatus = this.Factory.CreateRibbonDropDown();
             this.dp_Mailalter = this.Factory.CreateRibbonDropDown();
-            this.btn_ReMoveAttachments = this.Factory.CreateRibbonButton();
-            this.btn_MoveAttachments = this.Factory.CreateRibbonButton();
             this.separator1 = this.Factory.CreateRibbonSeparator();
+            this.btn_MoveAttachments = this.Factory.CreateRibbonButton();
             this.separator2 = this.Factory.CreateRibbonSeparator();
+            this.btn_ReMoveAttachments = this.Factory.CreateRibbonButton();
             this.rb_SDVOutlookTools.SuspendLayout();
             this.group1.SuspendLayout();
             this.SuspendLayout();
@@ -90,14 +90,9 @@
             this.dp_Mailalter.Label = "Zeitraum";
             this.dp_Mailalter.Name = "dp_Mailalter";
             // 
-            // btn_ReMoveAttachments
+            // separator1
             // 
-            this.btn_ReMoveAttachments.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
-            this.btn_ReMoveAttachments.Image = ((System.Drawing.Image)(resources.GetObject("btn_ReMoveAttachments.Image")));
-            this.btn_ReMoveAttachments.Label = "Remove";
-            this.btn_ReMoveAttachments.Name = "btn_ReMoveAttachments";
-            this.btn_ReMoveAttachments.ShowImage = true;
-            this.btn_ReMoveAttachments.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_RemoveAttachments_Click);
+            this.separator1.Name = "separator1";
             // 
             // btn_MoveAttachments
             // 
@@ -109,13 +104,18 @@
             this.btn_MoveAttachments.ShowImage = true;
             this.btn_MoveAttachments.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_MoveAttachments_Click);
             // 
-            // separator1
-            // 
-            this.separator1.Name = "separator1";
-            // 
             // separator2
             // 
             this.separator2.Name = "separator2";
+            // 
+            // btn_ReMoveAttachments
+            // 
+            this.btn_ReMoveAttachments.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+            this.btn_ReMoveAttachments.Image = ((System.Drawing.Image)(resources.GetObject("btn_ReMoveAttachments.Image")));
+            this.btn_ReMoveAttachments.Label = "Remove";
+            this.btn_ReMoveAttachments.Name = "btn_ReMoveAttachments";
+            this.btn_ReMoveAttachments.ShowImage = true;
+            this.btn_ReMoveAttachments.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_RemoveAttachments_Click);
             // 
             // Ribbon1
             // 

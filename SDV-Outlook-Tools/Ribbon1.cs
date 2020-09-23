@@ -186,7 +186,6 @@ namespace SDV_Outlook_Tools
                                             if (basePath != null)
                                             {
                                                 var fn = mi.Attachments[1].FileName.ToLower();
-                                               // MessageBox.Show(mi.Attachments[1].FileName.ToLower());
                                             // Create a further sub-folder for the sender
                                                 if (!Directory.Exists(basePath + folder.FolderPath + @"\" + mi.Sender.Address))
                                                 {
@@ -195,18 +194,17 @@ namespace SDV_Outlook_Tools
                                                 if (!File.Exists(basePath + folder.FolderPath + @"\" + mi.Sender.Address + @"\" + mi.Attachments[1].FileName))
                                                 {
                                                     mi.Attachments[1].SaveAsFile(basePath + folder.FolderPath + @"\" + mi.Sender.Address + @"\" + mi.Attachments[1].FileName);
-                                                    mi.Body = mi.Body + "Anhange nach " + basePath + folder.FolderPath + @"\" + mi.Sender.Address + @"\" + mi.Attachments[1].FileName + " verschoben.";
+                                                    mi.Body = mi.Body + "Anhange nach " + basePath + folder.FolderPath + @"\" + mi.Sender.Address + @"\" + mi.Attachments[1].FileName + " durch " + Environment.UserName + " verschoben.";
                                                     mi.Attachments[1].Delete();
                                                     mi.Save();
                                                 }
                                                 else
                                                 {
-     //                                               MessageBox.Show("Already saved " + mi.Attachments[i].FileName);
                                                 }
                                             }
                                             else
                                             {
-                                                mi.Body = mi.Body + "Anhange " + mi.Attachments[1].FileName + " gelöscht.";
+                                                mi.Body = mi.Body + "Anhange " + mi.Attachments[1].FileName + " durch " + Environment.UserName + " gelöscht.";
                                                 mi.Attachments[1].Delete();
                                                 mi.Save();
                                             }
