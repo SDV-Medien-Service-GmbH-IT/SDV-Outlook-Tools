@@ -22,20 +22,13 @@
 			<ComponentRef Id="Registry_Manifest" />
 			<ComponentRef Id="Registry_LoadBehavior" />
 		</Feature>
-<!--
-		<Media Id="1" Cabinet="SDV-Outlook-Tools.cab" EmbedCab="yes"/>
--->
-		<UIRef Id="WixUI_Advanced" />
-		<WixVariable Id="WixUILicenseRtf" Value="$(var.AddinFiles)\Files\EULA.rtf" />
-		<WixVariable Id="WixUIBannerBmp" Value="$(var.AddinFiles)\Files\Banner.bmp" />
-		<WixVariable Id="WixUIDialogBmp" Value="$(var.AddinFiles)\Files\Dialog.bmp" />
-		<!--
-		<PropertyRef Id="WIX_IS_NETFRAMEWORK_462_OR_LATER_INSTALLED"/>
-		<Condition Message="SDV-Outlook-Tools requires .NET Framework 4.6.1 or higher.">
-			<![CDATA[Installed OR WIX_IS_NETFRAMEWORK_462_OR_LATER_INSTALLED]]>
-		</Condition>
--->
 
+		<UIRef Id="WixUI_Advanced" />
+		<WixVariable Id="WixUILicenseRtf" Value="LICENSE.RTF" />
+		<WixVariable Id="WixUIBannerBmp" Value="$(var.AddinFiles)\Files\Banner.bmp" />
+		<!--
+		<WixVariable Id="WixUIDialogBmp" Value="$(var.AddinFiles)\Files\Dialog.bmp" />
+		-->
 		<PropertyRef Id='WIXNETFX4RELEASEINSTALLED'/>
 		<Condition Message='This setup requires the .NET Framework 4.7.2 (or greater) to be installed.'>
 			<![CDATA[Installed OR (WIXNETFX4RELEASEINSTALLED >= "#461808")]]>

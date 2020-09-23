@@ -44,7 +44,10 @@
             this.group1 = this.Factory.CreateRibbonGroup();
             this.dp_Mailstatus = this.Factory.CreateRibbonDropDown();
             this.dp_Mailalter = this.Factory.CreateRibbonDropDown();
-            this.btn_RemoveAttachments = this.Factory.CreateRibbonButton();
+            this.btn_ReMoveAttachments = this.Factory.CreateRibbonButton();
+            this.btn_MoveAttachments = this.Factory.CreateRibbonButton();
+            this.separator1 = this.Factory.CreateRibbonSeparator();
+            this.separator2 = this.Factory.CreateRibbonSeparator();
             this.rb_SDVOutlookTools.SuspendLayout();
             this.group1.SuspendLayout();
             this.SuspendLayout();
@@ -60,7 +63,10 @@
             // 
             this.group1.Items.Add(this.dp_Mailstatus);
             this.group1.Items.Add(this.dp_Mailalter);
-            this.group1.Items.Add(this.btn_RemoveAttachments);
+            this.group1.Items.Add(this.separator1);
+            this.group1.Items.Add(this.btn_MoveAttachments);
+            this.group1.Items.Add(this.separator2);
+            this.group1.Items.Add(this.btn_ReMoveAttachments);
             this.group1.Label = "Attachments";
             this.group1.Name = "group1";
             // 
@@ -84,15 +90,32 @@
             this.dp_Mailalter.Label = "Zeitraum";
             this.dp_Mailalter.Name = "dp_Mailalter";
             // 
-            // btn_RemoveAttachments
+            // btn_ReMoveAttachments
             // 
-            this.btn_RemoveAttachments.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
-            this.btn_RemoveAttachments.Image = ((System.Drawing.Image)(resources.GetObject("btn_RemoveAttachments.Image")));
-            this.btn_RemoveAttachments.Label = "Remove Attachments";
-            this.btn_RemoveAttachments.Name = "btn_RemoveAttachments";
-            this.btn_RemoveAttachments.ScreenTip = "Remove Attachments from Mails.";
-            this.btn_RemoveAttachments.ShowImage = true;
-            this.btn_RemoveAttachments.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_RemoveAttachments_Click);
+            this.btn_ReMoveAttachments.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+            this.btn_ReMoveAttachments.Image = ((System.Drawing.Image)(resources.GetObject("btn_ReMoveAttachments.Image")));
+            this.btn_ReMoveAttachments.Label = "Remove";
+            this.btn_ReMoveAttachments.Name = "btn_ReMoveAttachments";
+            this.btn_ReMoveAttachments.ShowImage = true;
+            this.btn_ReMoveAttachments.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_RemoveAttachments_Click);
+            // 
+            // btn_MoveAttachments
+            // 
+            this.btn_MoveAttachments.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+            this.btn_MoveAttachments.Image = ((System.Drawing.Image)(resources.GetObject("btn_MoveAttachments.Image")));
+            this.btn_MoveAttachments.Label = "Move";
+            this.btn_MoveAttachments.Name = "btn_MoveAttachments";
+            this.btn_MoveAttachments.ScreenTip = "Attachments from Mails.";
+            this.btn_MoveAttachments.ShowImage = true;
+            this.btn_MoveAttachments.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.btn_MoveAttachments_Click);
+            // 
+            // separator1
+            // 
+            this.separator1.Name = "separator1";
+            // 
+            // separator2
+            // 
+            this.separator2.Name = "separator2";
             // 
             // Ribbon1
             // 
@@ -112,9 +135,12 @@
 
         internal Microsoft.Office.Tools.Ribbon.RibbonTab rb_SDVOutlookTools;
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup group1;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton btn_RemoveAttachments;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton btn_MoveAttachments;
         internal Microsoft.Office.Tools.Ribbon.RibbonDropDown dp_Mailstatus;
         internal Microsoft.Office.Tools.Ribbon.RibbonDropDown dp_Mailalter;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton btn_ReMoveAttachments;
+        internal Microsoft.Office.Tools.Ribbon.RibbonSeparator separator1;
+        internal Microsoft.Office.Tools.Ribbon.RibbonSeparator separator2;
     }
 
     partial class ThisRibbonCollection

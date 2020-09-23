@@ -18,7 +18,7 @@ namespace SDV_Outlook_Tools
         {
             try
             {
-                dp_Mailstatus.SelectedItemIndex =1;
+                dp_Mailstatus.SelectedItemIndex =0;
                 dp_Mailalter.SelectedItemIndex = 2;
             }
             catch (System.Exception ex)
@@ -40,6 +40,20 @@ namespace SDV_Outlook_Tools
                 MessageBox.Show(ex.Message, "Fehler im Programmablauf", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        
+        private void btn_MoveAttachments_Click(object sender, RibbonControlEventArgs e)
+        {
+            try
+            {
+                string Mailstatus = dp_Mailstatus.SelectedItem.ToString();
+                int Mailalter = Convert.ToInt32(dp_Mailalter.SelectedItem.ToString());
+                MoveAttachments(Mailstatus, Mailalter);
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Fehler im Programmablauf", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
         public void RemoveAttachments(string Mailstatus,int Mailalter)
         {
@@ -48,11 +62,28 @@ namespace SDV_Outlook_Tools
                 DialogResult result1 = MessageBox.Show("Möchten Sie wirklich die Änhange aller "+ Mailstatus + " Mails älterer als " + Mailalter.ToString() + " Tage entfernen?", "Entfernen der Änhänge", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result1 == DialogResult.Yes)
                 {
-                    string pathToSave = getSaveFolder();
+                    string pathToSave = null;
                     if (pathToSave != "0")
                     {
                         EnumerateFoldersInDefaultStore(pathToSave, Mailstatus, Mailalter);
                     }
+                }
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Fehler im Programmablauf", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public void MoveAttachments(string Mailstatus, int Mailalter)
+        {
+            try
+            {
+                DialogResult result1 = MessageBox.Show("Möchten Sie wirklich die Änhange aller " + Mailstatus + " Mails älterer als " + Mailalter.ToString() + " Tage verschieben?", "Verschieben der Änhänge", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result1 == DialogResult.Yes)
+                {
+                    string pathToSave = getSaveFolder();
+                    EnumerateFoldersInDefaultStore(pathToSave, Mailstatus, Mailalter);
                 }
             }
             catch (System.Exception ex)
@@ -89,8 +120,12 @@ namespace SDV_Outlook_Tools
         static void EnumerateFoldersInDefaultStore(string pathToSaveFile, string Mailstatus, int Mailalter)
         {
             Microsoft.Office.Interop.Outlook.Application Application = new Microsoft.Office.Interop.Outlook.Application();
-            Microsoft.Office.Interop.Outlook.Folder root = Application.Session.DefaultStore.GetRootFolder() as Microsoft.Office.Interop.Outlook.Folder;
-            EnumerateFolders(root, pathToSaveFile, Mailstatus, Mailalter);
+        //    Microsoft.Office.Interop.Outlook.Folder root = Application.Session.DefaultStore.GetRootFolder() as Microsoft.Office.Interop.Outlook.Folder;
+            Microsoft.Office.Interop.Outlook.Folder folder = Application.Session.PickFolder() as Microsoft.Office.Interop.Outlook.Folder;
+            Microsoft.Office.Interop.Outlook.Folder folderFromID = Application.Session.GetFolderFromID(folder.EntryID, folder.StoreID) as Microsoft.Office.Interop.Outlook.Folder;
+           EnumerateFolders(folderFromID, pathToSaveFile, Mailstatus, Mailalter);
+
+         //   EnumerateFolders(root, pathToSaveFile, Mailstatus, Mailalter);
         }
 
         static void EnumerateFolders(Microsoft.Office.Interop.Outlook.Folder folder, string pathToSaveFile, string Mailstatus, int Mailalter)
@@ -98,27 +133,24 @@ namespace SDV_Outlook_Tools
             Microsoft.Office.Interop.Outlook.Folders childFolders = folder.Folders;
             if (childFolders.Count > 0)
             {
+                IterateMessages(folder, pathToSaveFile, Mailstatus, Mailalter);
                 foreach (Microsoft.Office.Interop.Outlook.Folder childFolder in childFolders)
                 {
-                    //MessageBox.Show(childFolder.FolderPath);
                     // We only want Inbox folders - ignore Contacts and others
                     if (childFolder.FolderPath.Contains("Posteingang"))
                     {
-                        // MessageBox.Show(childFolder.FolderPath);
-                        // Call EnumerateFolders using childFolder, to see if there are any sub-folders within this one
                         EnumerateFolders(childFolder, pathToSaveFile, Mailstatus, Mailalter);
+
                     }
                 }
+
             }
-            //MessageBox.Show("Checking in " + folder.FolderPath);
             IterateMessages(folder, pathToSaveFile, Mailstatus, Mailalter);
         }
 
         static void IterateMessages(Microsoft.Office.Interop.Outlook.Folder folder, string basePath, string Mailstatus, int Mailalter)
         {
-            var fi=folder.Items; //= folder.Items.Restrict("[Unread] = true");
-                                 // Mailstatus
-                                 // Mailalter
+            var fi=folder.Items;
             if (Mailstatus== "ungelesene")
             {
                 fi=folder.Items.Restrict("[Unread] = true");
@@ -134,47 +166,55 @@ namespace SDV_Outlook_Tools
                 {
                     Microsoft.Office.Interop.Outlook.MailItem mi = (Microsoft.Office.Interop.Outlook.MailItem)item;
                     var attachments = mi.Attachments;
-
-                    if (attachments.Count != 0)
-                    {
-                        // Create a directory to store the attachment 
-                        if (!Directory.Exists(basePath + folder.FolderPath))
+                        if (attachments.Count != 0)
                         {
-                            Directory.CreateDirectory(basePath + folder.FolderPath);
-                        }
-                        if (mi.ReceivedTime < DateTime.Now.AddDays(-Mailalter))
-                        {
-                           MessageBox.Show(mi.Subject.ToString());
-                            if (mi.SenderEmailAddress != "wiki@sdv.de")
+                            // Create a directory to store the attachment 
+                            if (basePath != null)
                             {
-                                MessageBox.Show(mi.SenderEmailAddress);
-                                for (int i = 1; i <= mi.Attachments.Count; i++)
+                                if (!Directory.Exists(basePath + folder.FolderPath))
                                 {
-                                    var fn = mi.Attachments[i].FileName.ToLower();
-                                    // Create a further sub-folder for the sender
-                                    if (!Directory.Exists(basePath + folder.FolderPath + @"\" + mi.Sender.Address))
-                                    {
-                                        Directory.CreateDirectory(basePath + folder.FolderPath + @"\" + mi.Sender.Address);
-                                    }
-                                    //totalfilesize = totalfilesize + mi.Attachments[i].Size;
-                                    if (!File.Exists(basePath + folder.FolderPath + @"\" + mi.Sender.Address + @"\" + mi.Attachments[i].FileName))
-                                    {
-                                        Console.WriteLine("Saving " + mi.Attachments[i].FileName);
-                                        mi.Attachments[i].SaveAsFile(basePath + folder.FolderPath + @"\" + mi.Sender.Address + @"\" + mi.Attachments[i].FileName);
-                                        mi.Body = mi.Body + "Anhange nach " + basePath + folder.FolderPath + @"\" + mi.Sender.Address + @"\" + mi.Attachments[i].FileName + " gespeichert.";
-                                        //mi.Attachments[i].Delete();
-                                        mi.Save();
-                                    }
-                                    else
-                                    {
-                                        MessageBox.Show("Already saved " + mi.Attachments[i].FileName);
-                                    }
-                                    MessageBox.Show("Subject: " + mi.Subject + " Attachment: " + mi.Attachments[i].FileName);
+                                    Directory.CreateDirectory(basePath + folder.FolderPath);
                                 }
                             }
-                        }
+                                if (mi.ReceivedTime < DateTime.Now.AddDays(-Mailalter))
+                                {
+                                    if (mi.SenderEmailAddress != "wiki@sdv.de")
+                                    {
+                                    int AttachmentsCount = mi.Attachments.Count;
+                                        for (int i = 1; i <= AttachmentsCount; i++)
+                                        {
+                                            if (basePath != null)
+                                            {
+                                                var fn = mi.Attachments[1].FileName.ToLower();
+                                               // MessageBox.Show(mi.Attachments[1].FileName.ToLower());
+                                            // Create a further sub-folder for the sender
+                                                if (!Directory.Exists(basePath + folder.FolderPath + @"\" + mi.Sender.Address))
+                                                {
+                                                    Directory.CreateDirectory(basePath + folder.FolderPath + @"\" + mi.Sender.Address);
+                                                }
+                                                if (!File.Exists(basePath + folder.FolderPath + @"\" + mi.Sender.Address + @"\" + mi.Attachments[1].FileName))
+                                                {
+                                                    mi.Attachments[1].SaveAsFile(basePath + folder.FolderPath + @"\" + mi.Sender.Address + @"\" + mi.Attachments[1].FileName);
+                                                    mi.Body = mi.Body + "Anhange nach " + basePath + folder.FolderPath + @"\" + mi.Sender.Address + @"\" + mi.Attachments[1].FileName + " verschoben.";
+                                                    mi.Attachments[1].Delete();
+                                                    mi.Save();
+                                                }
+                                                else
+                                                {
+     //                                               MessageBox.Show("Already saved " + mi.Attachments[i].FileName);
+                                                }
+                                            }
+                                            else
+                                            {
+                                                mi.Body = mi.Body + "Anhange " + mi.Attachments[1].FileName + " gelöscht.";
+                                                mi.Attachments[1].Delete();
+                                                mi.Save();
+                                            }
+                                        }
+                                    }
+                                }
 
-                    }
+                            }
                 }
             }
         }
