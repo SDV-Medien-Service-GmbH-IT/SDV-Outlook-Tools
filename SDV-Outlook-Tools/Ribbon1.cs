@@ -119,53 +119,69 @@ namespace SDV_Outlook_Tools
 
         static void EnumerateFoldersInDefaultStore(string pathToSaveFile, string Mailstatus, int Mailalter)
         {
-            Microsoft.Office.Interop.Outlook.Application Application = new Microsoft.Office.Interop.Outlook.Application();
-        //    Microsoft.Office.Interop.Outlook.Folder root = Application.Session.DefaultStore.GetRootFolder() as Microsoft.Office.Interop.Outlook.Folder;
-            Microsoft.Office.Interop.Outlook.Folder folder = Application.Session.PickFolder() as Microsoft.Office.Interop.Outlook.Folder;
-            Microsoft.Office.Interop.Outlook.Folder folderFromID = Application.Session.GetFolderFromID(folder.EntryID, folder.StoreID) as Microsoft.Office.Interop.Outlook.Folder;
-           EnumerateFolders(folderFromID, pathToSaveFile, Mailstatus, Mailalter);
-
-         //   EnumerateFolders(root, pathToSaveFile, Mailstatus, Mailalter);
+            try
+            {
+                Microsoft.Office.Interop.Outlook.Application Application = new Microsoft.Office.Interop.Outlook.Application();
+                //    Microsoft.Office.Interop.Outlook.Folder root = Application.Session.DefaultStore.GetRootFolder() as Microsoft.Office.Interop.Outlook.Folder;
+                Microsoft.Office.Interop.Outlook.Folder folder = Application.Session.PickFolder() as Microsoft.Office.Interop.Outlook.Folder;
+                if (folder != null)
+                {
+                    Microsoft.Office.Interop.Outlook.Folder folderFromID = Application.Session.GetFolderFromID(folder.EntryID, folder.StoreID) as Microsoft.Office.Interop.Outlook.Folder;
+                    EnumerateFolders(folderFromID, pathToSaveFile, Mailstatus, Mailalter);
+                }
+                //   EnumerateFolders(root, pathToSaveFile, Mailstatus, Mailalter);
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Fehler im Programmablauf", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         static void EnumerateFolders(Microsoft.Office.Interop.Outlook.Folder folder, string pathToSaveFile, string Mailstatus, int Mailalter)
         {
-            Microsoft.Office.Interop.Outlook.Folders childFolders = folder.Folders;
-            if (childFolders.Count > 0)
+            try
             {
-                IterateMessages(folder, pathToSaveFile, Mailstatus, Mailalter);
-                foreach (Microsoft.Office.Interop.Outlook.Folder childFolder in childFolders)
+                Microsoft.Office.Interop.Outlook.Folders childFolders = folder.Folders;
+                if (childFolders.Count > 0)
                 {
-                    // We only want Inbox folders - ignore Contacts and others
-                    if (childFolder.FolderPath.Contains("Posteingang"))
+                    IterateMessages(folder, pathToSaveFile, Mailstatus, Mailalter);
+                    foreach (Microsoft.Office.Interop.Outlook.Folder childFolder in childFolders)
                     {
+                        // We only want Inbox folders - ignore Contacts and others
+                        //if (childFolder.FolderPath.Contains("Posteingang"))
+                        //{
                         EnumerateFolders(childFolder, pathToSaveFile, Mailstatus, Mailalter);
-
+                        //}
                     }
                 }
-
+                IterateMessages(folder, pathToSaveFile, Mailstatus, Mailalter);
             }
-            IterateMessages(folder, pathToSaveFile, Mailstatus, Mailalter);
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Fehler im Programmablauf", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         static void IterateMessages(Microsoft.Office.Interop.Outlook.Folder folder, string basePath, string Mailstatus, int Mailalter)
         {
-            var fi=folder.Items;
-            if (Mailstatus== "ungelesene")
+            try
             {
-                fi=folder.Items.Restrict("[Unread] = true");
-            }
-            else if (Mailstatus == "gelesene")
-            {
-                fi = folder.Items.Restrict("[Unread] = false" );
-            }
-      
-            if (fi != null)
-            {
-                foreach (Object item in fi)
+                var fi = folder.Items;
+                if (Mailstatus == "ungelesene")
                 {
-                    Microsoft.Office.Interop.Outlook.MailItem mi = (Microsoft.Office.Interop.Outlook.MailItem)item;
-                    var attachments = mi.Attachments;
+                    fi = folder.Items.Restrict("[Unread] = true");
+                }
+                else if (Mailstatus == "gelesene")
+                {
+                    fi = folder.Items.Restrict("[Unread] = false");
+                }
+
+                if (fi != null)
+                {
+                    foreach (Object item in fi)
+                    {
+                        Microsoft.Office.Interop.Outlook.MailItem mi = (Microsoft.Office.Interop.Outlook.MailItem)item;
+                        var attachments = mi.Attachments;
                         if (attachments.Count != 0)
                         {
                             // Create a directory to store the attachment 
@@ -176,44 +192,50 @@ namespace SDV_Outlook_Tools
                                     Directory.CreateDirectory(basePath + folder.FolderPath);
                                 }
                             }
-                                if (mi.ReceivedTime < DateTime.Now.AddDays(-Mailalter))
+                            if (mi.ReceivedTime < DateTime.Now.AddDays(-Mailalter))
+                            {
+                                if (mi.SenderEmailAddress != "wiki@sdv.de")
                                 {
-                                    if (mi.SenderEmailAddress != "wiki@sdv.de")
-                                    {
                                     int AttachmentsCount = mi.Attachments.Count;
-                                        for (int i = 1; i <= AttachmentsCount; i++)
+                                    for (int i = 1; i <= AttachmentsCount; i++)
+                                    {
+                                        if (basePath != null)
                                         {
-                                            if (basePath != null)
-                                            {
-                                                var fn = mi.Attachments[1].FileName.ToLower();
+                                            var fn = mi.Attachments[1].FileName.ToLower();
                                             // Create a further sub-folder for the sender
-                                                if (!Directory.Exists(basePath + folder.FolderPath + @"\" + mi.Sender.Address))
-                                                {
-                                                    Directory.CreateDirectory(basePath + folder.FolderPath + @"\" + mi.Sender.Address);
-                                                }
-                                                if (!File.Exists(basePath + folder.FolderPath + @"\" + mi.Sender.Address + @"\" + mi.Attachments[1].FileName))
-                                                {
-                                                    mi.Attachments[1].SaveAsFile(basePath + folder.FolderPath + @"\" + mi.Sender.Address + @"\" + mi.Attachments[1].FileName);
-                                                    mi.Body = mi.Body + "Anhange nach " + basePath + folder.FolderPath + @"\" + mi.Sender.Address + @"\" + mi.Attachments[1].FileName + " durch " + Environment.UserName + " verschoben.";
-                                                    mi.Attachments[1].Delete();
-                                                    mi.Save();
-                                                }
-                                                else
-                                                {
-                                                }
-                                            }
-                                            else
+                                            if (!Directory.Exists(basePath + folder.FolderPath + @"\" + mi.Sender.Address))
                                             {
-                                                mi.Body = mi.Body + "Anhange " + mi.Attachments[1].FileName + " durch " + Environment.UserName + " gelöscht.";
+                                                Directory.CreateDirectory(basePath + folder.FolderPath + @"\" + mi.Sender.Address);
+                                            }
+                                            if (!File.Exists(basePath + folder.FolderPath + @"\" + mi.Sender.Address + @"\" + mi.Attachments[1].FileName))
+                                            {
+                                                mi.Attachments[1].SaveAsFile(basePath + folder.FolderPath + @"\" + mi.Sender.Address + @"\" + mi.Attachments[1].FileName);
+                                                mi.Body = mi.Body + "Anhange nach " + basePath + folder.FolderPath + @"\" + mi.Sender.Address + @"\" + mi.Attachments[1].FileName + " durch " + Environment.UserName + " verschoben.";
                                                 mi.Attachments[1].Delete();
                                                 mi.Save();
                                             }
+                                            else
+                                            {
+                                            }
+                                        }
+                                        else
+                                        {
+                                            mi.Body = mi.Body + "Anhange " + mi.Attachments[1].FileName + " durch " + Environment.UserName + " gelöscht.";
+                                            mi.Attachments[1].Delete();
+                                            mi.Save();
                                         }
                                     }
                                 }
-
                             }
+
+                        }
+                    }
+                    MessageBox.Show("Vorgang abgeschlossen", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Fehler im Programmablauf", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
