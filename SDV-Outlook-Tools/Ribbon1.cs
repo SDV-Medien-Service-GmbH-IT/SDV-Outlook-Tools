@@ -182,54 +182,56 @@ namespace SDV_Outlook_Tools
                 {
                     foreach (Object item in fi)
                     {
+                        if (item is Microsoft.Office.Interop.Outlook.MailItem)
+                        { 
                         Microsoft.Office.Interop.Outlook.MailItem mi = (Microsoft.Office.Interop.Outlook.MailItem)item;
                         var attachments = mi.Attachments;
-                        if (attachments.Count != 0)
-                        {
-                            // Create a directory to store the attachment 
-                            if (basePath != null)
+                            if (attachments.Count != 0)
                             {
-                                if (!Directory.Exists(basePath + folder.FolderPath))
+                                // Create a directory to store the attachment 
+                                if (basePath != null)
                                 {
-                                    Directory.CreateDirectory(basePath + folder.FolderPath);
-                                }
-                            }
-                            if (mi.ReceivedTime < DateTime.Now.AddDays(-Mailalter))
-                            {
-                                if (mi.SenderEmailAddress != "wiki@sdv.de")
-                                {
-                                    int AttachmentsCount = mi.Attachments.Count;
-                                    for (int i = 1; i <= AttachmentsCount; i++)
+                                    if (!Directory.Exists(basePath + folder.FolderPath))
                                     {
-                                        if (basePath != null)
+                                        Directory.CreateDirectory(basePath + folder.FolderPath);
+                                    }
+                                }
+                                if (mi.ReceivedTime < DateTime.Now.AddDays(-Mailalter))
+                                {
+                                    if (mi.SenderEmailAddress != "wiki@sdv.de")
+                                    {
+                                        int AttachmentsCount = mi.Attachments.Count;
+                                        for (int i = 1; i <= AttachmentsCount; i++)
                                         {
-                                            var fn = mi.Attachments[1].FileName.ToLower();
-                                            // Create a further sub-folder for the sender
-                                            if (!Directory.Exists(basePath + folder.FolderPath + @"\" + mi.Sender.Address))
+                                            if (basePath != null)
                                             {
-                                                Directory.CreateDirectory(basePath + folder.FolderPath + @"\" + mi.Sender.Address);
-                                            }
-                                            if (!File.Exists(basePath + folder.FolderPath + @"\" + mi.Sender.Address + @"\" + mi.Attachments[1].FileName))
-                                            {
-                                                mi.Attachments[1].SaveAsFile(basePath + folder.FolderPath + @"\" + mi.Sender.Address + @"\" + mi.Attachments[1].FileName);
-                                                mi.Body = mi.Body + "Anhange nach " + basePath + folder.FolderPath + @"\" + mi.Sender.Address + @"\" + mi.Attachments[1].FileName + " durch " + Environment.UserName + " verschoben.";
-                                                mi.Attachments[1].Delete();
-                                                mi.Save();
+                                                var fn = mi.Attachments[1].FileName.ToLower();
+                                                // Create a further sub-folder for the sender
+                                                if (!Directory.Exists(basePath + folder.FolderPath + @"\" + mi.Sender.Address))
+                                                {
+                                                    Directory.CreateDirectory(basePath + folder.FolderPath + @"\" + mi.Sender.Address);
+                                                }
+                                                if (!File.Exists(basePath + folder.FolderPath + @"\" + mi.Sender.Address + @"\" + mi.Attachments[1].FileName))
+                                                {
+                                                    mi.Attachments[1].SaveAsFile(basePath + folder.FolderPath + @"\" + mi.Sender.Address + @"\" + mi.Attachments[1].FileName);
+                                                    mi.Body = mi.Body + "Anhange nach " + basePath + folder.FolderPath + @"\" + mi.Sender.Address + @"\" + mi.Attachments[1].FileName + " durch " + Environment.UserName + " verschoben.";
+                                                    mi.Attachments[1].Delete();
+                                                    mi.Save();
+                                                }
+                                                else
+                                                {
+                                                }
                                             }
                                             else
                                             {
+                                                mi.Body = mi.Body + "Anhange " + mi.Attachments[1].FileName + " durch " + Environment.UserName + " gelöscht.";
+                                                mi.Attachments[1].Delete();
+                                                mi.Save();
                                             }
-                                        }
-                                        else
-                                        {
-                                            mi.Body = mi.Body + "Anhange " + mi.Attachments[1].FileName + " durch " + Environment.UserName + " gelöscht.";
-                                            mi.Attachments[1].Delete();
-                                            mi.Save();
                                         }
                                     }
                                 }
                             }
-
                         }
                     }
                     MessageBox.Show("Vorgang abgeschlossen", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);

@@ -20,3 +20,4 @@ C:\GitHub\SDV-Outlook-Tools\SDV-Outlook-Tools\obj\Release\SDV-Outlook-Tools_Mark
 C:\GitHub\SDV-Outlook-Tools\SDV-Outlook-Tools\obj\Release\SDV-Outlook-Tools_MarkupCompile.lref
 C:\GitHub\SDV-Outlook-Tools\SDV-Outlook-Tools\obj\Release\About.baml
 C:\GitHub\SDV-Outlook-Tools\SDV-Outlook-Tools\obj\Release\SDV-Outlook-Tools.g.resources
+C:\GitHub\SDV-Outlook-Tools\SDV-Outlook-Tools\obj\Release\SDV-Outlook-Tools.csprojAssemblyReference.cache
