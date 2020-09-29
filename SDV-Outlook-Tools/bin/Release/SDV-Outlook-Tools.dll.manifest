@@ -83,6 +83,16 @@
   </dependency>
   <dependency>
     <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="PresentationCore" version="4.0.0.0" publicKeyToken="31BF3856AD364E35" language="neutral" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="PresentationFramework" version="4.0.0.0" publicKeyToken="31BF3856AD364E35" language="neutral" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
       <assemblyIdentity name="stdole" version="7.0.3300.0" publicKeyToken="B03F5F7F11D50A3A" language="neutral" />
     </dependentAssembly>
   </dependency>
@@ -118,12 +128,22 @@
   </dependency>
   <dependency>
     <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="System.Xaml" version="4.0.0.0" publicKeyToken="B77A5C561934E089" language="neutral" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
       <assemblyIdentity name="System.Xml" version="4.0.0.0" publicKeyToken="B77A5C561934E089" language="neutral" />
     </dependentAssembly>
   </dependency>
   <dependency>
     <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
       <assemblyIdentity name="System.Xml.Linq" version="4.0.0.0" publicKeyToken="B77A5C561934E089" language="neutral" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="WindowsBase" version="4.0.0.0" publicKeyToken="31BF3856AD364E35" language="neutral" />
     </dependentAssembly>
   </dependency>
   <dependency>
@@ -151,14 +171,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SDV-Outlook-Tools.dll" size="79872">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="SDV-Outlook-Tools.dll" size="72704">
       <assemblyIdentity name="SDV-Outlook-Tools" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>j6azOvDv2ieJO2Zc2Jajbj/yF8b9A2Xywhu0zgsXbCc=</dsig:DigestValue>
+        <dsig:DigestValue>f4R3kN6kabUqgtdtrc/UDTI531NQvCKU5slEykNJ398=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -181,6 +201,24 @@
     </hash>
   </file>
   <file name="Files\SDV.ico" size="43041">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>aFD8fz11OIytossO8r3Ru9Z4+3mHyCiC6WrHYcs8ICo=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Files\SDV_Logo_claim.png" size="13630">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>AZBcP7HUl0F+JK+Pu0X0NrLZFpNCITpB5rkvRM4F8Bw=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="SDV.ico" size="43041">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
@@ -214,4 +252,4 @@
       </vstov4:customizations>
     </vstav3:application>
   </vstav3:addIn>
-<publisherIdentity name="CN=SDVDOM\daniel.thaller" issuerKeyHash="fc96c9ee4e1e1df7c014552888af84b9404ddbdd" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>/NX78sIYSNuH1akZzLiqzKDp3bfLPJ7EzfTCvnsl9LE=</DigestValue></Reference></SignedInfo><SignatureValue>Ptms/I7R/5TnvTH5pHwDw+PQ4GeTkcPuTVdBicknllcbfObYkq6az6HEzP9nhEbEXtNsnv0iOcy4M/eOzyPGxZkOQnHfjqmLv9OLeyD/gGGUGNL/rXGcCllnc+AZ4KrO9ISmjCwPQbruzV+CTg2pUHoRY4UsxW3Lo//LmTIC4VQ=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>tu4N7egxz0fdrn7c8neiNXL0yKdz4OtPgoftLmt72XwzBfD01dalEkTaJG20jZrCrdaA+UMF2paH45sdYM3ZyT/iyWnNgrAg9I0eWrVLOrFulDJT+NXIZzynKH6FZSVodGiT4yWsD24AL7nzd8uxxos3FGw5YLBiVWQ1lWDVi4E=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="b1f4257bbec2f4cdc49e3ccbb7dde9a0ccaab8cc19a9d587db4818c2f2fbd5fc" Description="" Url=""><as:assemblyIdentity name="SDV-Outlook-Tools.dll" version="1.0.0.0" publicKeyToken="89bea96ed6914601" language="neutral" processorArchitecture="x86" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=SDVDOM\daniel.thaller</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>DDnJ4fCnrEOYRj5CxfL4NM+sDDE4c8SuNmd/BX9e2y0=</DigestValue></Reference></SignedInfo><SignatureValue>f/iQ4J8x6febh6EkMmuo9ZeC4Lse/6f+04DTnwzFTu1YERrRZ6Utv1B0GhdsCXz9WNE/KMajqy57H8ZoOwtH5KiFsFfssBXkeJwLy96OYFCmm+f1Ni2G2QBuNSmu1GdrmKtaNvzl7b/un8iJR8hIk+Xjayc1KdRUHe8rE9ckwgI=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>tu4N7egxz0fdrn7c8neiNXL0yKdz4OtPgoftLmt72XwzBfD01dalEkTaJG20jZrCrdaA+UMF2paH45sdYM3ZyT/iyWnNgrAg9I0eWrVLOrFulDJT+NXIZzynKH6FZSVodGiT4yWsD24AL7nzd8uxxos3FGw5YLBiVWQ1lWDVi4E=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIB7TCCAVagAwIBAgIQGAkbau4MlJ1N/yOngOZbNTANBgkqhkiG9w0BAQsFADA1MTMwMQYDVQQDHioAUwBEAFYARABPAE0AXABkAGEAbgBpAGUAbAAuAHQAaABhAGwAbABlAHIwHhcNMjAwOTE4MDcxMDI1WhcNMjEwOTE4MTMxMDI1WjA1MTMwMQYDVQQDHioAUwBEAFYARABPAE0AXABkAGEAbgBpAGUAbAAuAHQAaABhAGwAbABlAHIwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBALbuDe3oMc9H3a5+3PJ3ojVy9Minc+DrT4KH7S5re9l8MwXw9NXWpRJE2iRttI2awq3WgPlDBdqWh+ObHWDN2ck/4slpzYKwIPSNHlq1SzqxbpQyU/jVyGc8pyh+hWUlaHRok+MlrA9uAC+583fLscaLNxRsOWCwYlVkNZVg1YuBAgMBAAEwDQYJKoZIhvcNAQELBQADgYEABfDmMkZD1N6x43sVhHa7zXY7X1OC21LZWqfBN8XqyArKBtVhHY7QZvMjIrjxJNcw9fIMLVFI7IMVHSCRxaldikDxa9ytkgBv+fXUa2m8RmRE4yy2BRAilANitRID7HIFJIHaGLA14W8OHywSQ33EnYxjpbEqbFaOAHjnEheg2Gk=</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>
+<publisherIdentity name="CN=SDVDOM\daniel.thaller" issuerKeyHash="fc96c9ee4e1e1df7c014552888af84b9404ddbdd" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>9IUbeK5A3zuum3RpZBRX51jO7g4AayshbqBz3tBxvU4=</DigestValue></Reference></SignedInfo><SignatureValue>XydaPmZea8TiomhdPL9MNztC6YMwwkLmlaqAqlBauwgpDg1NdHiOqRMRxzV8on2HHG+Ue6v4sa0DV+hEuAIPnbNndEjA9sVfv9jA3em46ht531IDEZ+gSOCB7KwFqUodEIQUksVNNxEawbaukcj44slPJDpFxDps2M0fWlI5qxw=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>tu4N7egxz0fdrn7c8neiNXL0yKdz4OtPgoftLmt72XwzBfD01dalEkTaJG20jZrCrdaA+UMF2paH45sdYM3ZyT/iyWnNgrAg9I0eWrVLOrFulDJT+NXIZzynKH6FZSVodGiT4yWsD24AL7nzd8uxxos3FGw5YLBiVWQ1lWDVi4E=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="4ebd71d0de73a06e212b6b000eeece58e757146469749bae3bdf40ae781b85f4" Description="" Url=""><as:assemblyIdentity name="SDV-Outlook-Tools.dll" version="1.0.0.0" publicKeyToken="89bea96ed6914601" language="neutral" processorArchitecture="x86" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=SDVDOM\daniel.thaller</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>5K3RNkBxNxaH5W9mAv4ZsR0qfZ8FlMm34budzsmZ9KY=</DigestValue></Reference></SignedInfo><SignatureValue>gxy1gwGxWfRA/o1qzkxC5osAo+a7kihIRNn3WZiOeTMvPqU1d0sUCtcZeqYK7iSBEay1/6o7NReJqhVBqvDw/ABUjvV+Kjhd4zUY0kAqzD2y1usDxtqeL7PTzFgE4pi6yQat3KZpLloRXCJyNyFZTwtXJqmculkDGNN6XcoTKEw=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>tu4N7egxz0fdrn7c8neiNXL0yKdz4OtPgoftLmt72XwzBfD01dalEkTaJG20jZrCrdaA+UMF2paH45sdYM3ZyT/iyWnNgrAg9I0eWrVLOrFulDJT+NXIZzynKH6FZSVodGiT4yWsD24AL7nzd8uxxos3FGw5YLBiVWQ1lWDVi4E=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIB7TCCAVagAwIBAgIQGAkbau4MlJ1N/yOngOZbNTANBgkqhkiG9w0BAQsFADA1MTMwMQYDVQQDHioAUwBEAFYARABPAE0AXABkAGEAbgBpAGUAbAAuAHQAaABhAGwAbABlAHIwHhcNMjAwOTE4MDcxMDI1WhcNMjEwOTE4MTMxMDI1WjA1MTMwMQYDVQQDHioAUwBEAFYARABPAE0AXABkAGEAbgBpAGUAbAAuAHQAaABhAGwAbABlAHIwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBALbuDe3oMc9H3a5+3PJ3ojVy9Minc+DrT4KH7S5re9l8MwXw9NXWpRJE2iRttI2awq3WgPlDBdqWh+ObHWDN2ck/4slpzYKwIPSNHlq1SzqxbpQyU/jVyGc8pyh+hWUlaHRok+MlrA9uAC+583fLscaLNxRsOWCwYlVkNZVg1YuBAgMBAAEwDQYJKoZIhvcNAQELBQADgYEABfDmMkZD1N6x43sVhHa7zXY7X1OC21LZWqfBN8XqyArKBtVhHY7QZvMjIrjxJNcw9fIMLVFI7IMVHSCRxaldikDxa9ytkgBv+fXUa2m8RmRE4yy2BRAilANitRID7HIFJIHaGLA14W8OHywSQ33EnYxjpbEqbFaOAHjnEheg2Gk=</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>

@@ -45,6 +45,7 @@ namespace SDV_Outlook_Tools
         {
             try
             {
+                
                 string Mailstatus = dp_Mailstatus.SelectedItem.ToString();
                 int Mailalter = Convert.ToInt32(dp_Mailalter.SelectedItem.ToString());
                 MoveAttachments(Mailstatus, Mailalter);
@@ -79,6 +80,7 @@ namespace SDV_Outlook_Tools
         {
             try
             {
+                MessageBox.Show("Bitte beachten Sie die gesetztlichen die Vorgangen zu E-Mailarchivierung!", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 DialogResult result1 = MessageBox.Show("Möchten Sie wirklich die Änhange aller " + Mailstatus + " Mails älterer als " + Mailalter.ToString() + " Tage verschieben?", "Verschieben der Änhänge", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result1 == DialogResult.Yes)
                 {
@@ -239,5 +241,10 @@ namespace SDV_Outlook_Tools
             }
         }
 
+        private void button1_Click(object sender, RibbonControlEventArgs e)
+        {
+            About dialog = new About();
+            dialog.ShowDialog();
+        }
     }
 }
